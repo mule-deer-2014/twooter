@@ -1,0 +1,23 @@
+<h1>Listing twoots</h1>
+
+<table>
+  <tr>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @twoots.each do |twoot| %>
+  <tr>
+    <td><%= twoot.body %></td>
+    <td><%= link_to 'Show', twoot %></td>
+    <td><%= link_to 'Edit', edit_twoot_path(twoot) %></td>
+    <td><%= link_to 'Destroy', twoot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Twoot', new_twoot_path %>
