@@ -7,6 +7,7 @@ class TwootsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @twoots }
+      format.xml { render text: "XML sucks" }
     end
   end
 
