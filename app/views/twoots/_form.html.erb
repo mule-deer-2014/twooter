@@ -19,3 +19,13 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $("input[type='submit']").on('click', function(e) {
+    var formData = $(this).parents("form").serialize();
+    $.post('/twoots.json', formData, function(jsonResponse) {
+      $("body").append(jsonResponse.body);
+    });
+    e.preventDefault();
+  });
+</script>
