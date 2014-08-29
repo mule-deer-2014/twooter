@@ -42,16 +42,32 @@ class TwootsController < ApplicationController
   # POST /twoots.json
   def create
     @twoot = Twoot.new(params[:twoot])
+    #   
+    #
+    # this works
+     #render partial: 'datwoot', object: @twoot, layout: false 
 
-    respond_to do |format|
-      if @twoot.save
-        format.html { redirect_to @twoot, notice: 'Twoot was successfully created.' }
-        format.json { render json: @twoot, status: :created, location: @twoot }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @twoot.errors, status: :unprocessable_entity }
-      end
-    end
+     # This doesn't
+#    respond_to do |format|
+#      if @twoot.save
+#        format.html { redirect_to @twoot, notice: 'Twoot was successfully created.' }
+#        format.json { render json: @twoot, status: :created, location: @twoot }
+#        format.js   {render partial: 'datwoot', object: @twoot, layout: false }
+#      else
+#        format.html { render action: "new" }
+#        format.json { render json: @twoot.errors, status: :unprocessable_entity }
+#      end
+#    end
+
+    #respond_to do |format|
+      #if @twoot.save
+        #format.js   {render partial: 'datwoot', object: @twoot, layout: false }
+      #else
+        #format.html { render action: "new" }
+        #format.json { render json: @twoot.errors, status: :unprocessable_entity }
+      #end
+    #end
+     render partial: 'datwoot', object: @twoot, layout: false 
   end
 
   # PUT /twoots/1

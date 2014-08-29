@@ -3,3 +3,57 @@
 <%= render 'form' %>
 
 <%= link_to 'Back', twoots_path %>
+<script type="text/javascript" charset="utf-8">
+  $("body").on("ajax:success", function(data,b,c) {
+      //alert('success was seen');
+      debugger
+          $(this).append(b);
+  });
+  $.rails.ajaxx = function(opts) {
+    /*
+    function debugfn(data, status, xhr) {
+      debugger;
+    }
+
+
+
+
+*/
+
+//    function mySuccessCallback(data, status, xhr) {
+//      var cbs = [ debugfn, opts.success ];
+//      for (var i = 0; i < cbs.length; i++) {
+//        cbs[i].apply(null, [data, status, xhr]);
+//      }
+//    }
+    
+    function mySuccessCallback(a, b, c) {
+      //debugger;
+      $("body").trigger("ajax:success");
+    }
+
+      //debugger;
+    $.extend(opts, {
+        success: mySuccessCallback,
+        beforeSend: function() {
+          //debugger; // before sending
+          },
+        error: function() {
+          //debugger; // before sending
+          },
+
+    });
+    opts.failure = function() {alert('i die')};
+    //debugger;
+    $.ajax(opts).then(function(){console.log('wtf'); debugger; console.log('eh') })
+
+      $("body").on("ajax:complete", function() {
+          alert('complete');
+      });
+
+      $("body").on("ajax:error", function(data) {
+          this.append(data);
+      });
+  }
+
+</script>
