@@ -1,0 +1,20 @@
+/*
+
+This is brittle as all get-out: forget the alert ""s and you're broken.
+
+Suppose you get the wrong string of " or ' and the interpolated text can close
+the JavaScript " and your'e broken.  You're going to have to try very hard to
+_not_ get broken.
+
+Obviously you can use a lot of JavaScript here, more than just an alert() you
+could use jQuery to append the content into the DOM.
+
+You should always use the j() method or escape_javascript() method to escape
+data that is sent into the view where escaping might be an issue.  Imagine that
+@twoot.body has a " in it.  When that's interpolated you might induce a
+JavaScript syntax error!
+
+*/
+
+alert("<%= Rails.version -%> saw <%= @twoot.body -%>");
+$("body").append("<%= j(@twoot.body) -%>");
