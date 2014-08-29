@@ -43,15 +43,20 @@ class TwootsController < ApplicationController
   def create
     @twoot = Twoot.new(params[:twoot])
 
-    respond_to do |format|
-      if @twoot.save
-        format.html { redirect_to @twoot, notice: 'Twoot was successfully created.' }
-        format.json { render json: @twoot, status: :created, location: @twoot }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @twoot.errors, status: :unprocessable_entity }
-      end
-    end
+    # Using this method we are not able to use the
+    #
+    # respond_to do |format|
+    #   format.js
+    # end
+    #
+    # interface.  The reason is this is that a partial returns HTML, if we
+    # respond-to (based on remote: true which asks for JavaScript) the
+    # front-end expects Javascript and tries to eval the result.  But the
+    # returned content is HTML.  So basically we're trying to evaluate
+    # the HTML content of "_twoot" as JavaScript and that will never work.
+    #
+
+    render partial: 'twoot', object: @twoot, layout: false
   end
 
   # PUT /twoots/1
